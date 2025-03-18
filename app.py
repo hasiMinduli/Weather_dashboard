@@ -70,10 +70,14 @@ if "current" in data:
     st.metric(label="❄️ Snowfall", value=f"{snowfall} cm")
 
 # Hourly temperature plot using st.line_chart
+# Hourly temperature, rain, showers, and snowfall plot using st.line_chart
 if "hourly" in data:
     hourly_data = data["hourly"]
     times = hourly_data["time"]
     temperatures = hourly_data["temperature_2m"]
+    rain = hourly_data["rain"]
+    snowfall = hourly_data["snowfall"]
+    showers = hourly_data["showers"]
 
     # Convert times to a pandas datetime format
     times = pd.to_datetime(times)
@@ -81,7 +85,10 @@ if "hourly" in data:
     # Create a DataFrame for Streamlit's line chart
     weather_df = pd.DataFrame({
         'Time': times,
-        'Temperature (°C)': temperatures
+        'Temperature (°C)': temperatures,
+        'Rain (mm)': rain,
+        'Snowfall (cm)': snowfall,
+        'Showers (mm)': showers
     })
 
     # Display the line chart
